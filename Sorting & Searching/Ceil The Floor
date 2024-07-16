@@ -1,0 +1,43 @@
+Given an unsorted array Arr[] of N integers and an integer X, find floor and ceiling of X in Arr[0..N-1].
+Floor of X is the largest element which is smaller than or equal to X. Floor of X doesn’t exist if X is smaller than smallest element of 
+Arr[].
+Ceil of X is the smallest element which is greater than or equal to X. Ceil of X doesn’t exist if X is greater than greatest element of 
+Arr[].
+
+class Solve {
+    // Method to find the floor and ceil of a given number x in an array arr of size n
+    Pair getFloorAndCeil(int[] arr, int n, int x) {
+        // Initialize ceil to the maximum possible integer value
+        int ceil = Integer.MAX_VALUE;
+        // Initialize floor to the minimum possible integer value
+        int floor = Integer.MIN_VALUE;
+        
+        // Iterate through each element in the array
+        for (int i = 0; i < n; i++) {
+            int curr = arr[i];
+            
+            // Update ceil if the current element is greater than or equal to x and less than the current ceil
+            if (curr >= x && curr < ceil) {
+                ceil = curr;
+            }
+            
+            // Update floor if the current element is less than or equal to x and greater than the current floor
+            if (curr <= x && curr > floor) {
+                floor = curr;
+            }
+        }
+        
+        // If ceil wasn't updated, set it to -1
+        if (ceil == Integer.MAX_VALUE) {
+            ceil = -1;
+        }
+        
+        // If floor wasn't updated, set it to -1
+        if (floor == Integer.MIN_VALUE) {
+            floor = -1;
+        }
+        
+        // Return a Pair object containing the floor and ceil
+        return new Pair(floor, ceil);
+    }
+}
