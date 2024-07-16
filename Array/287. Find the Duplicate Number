@@ -1,0 +1,45 @@
+Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.
+There is only one repeated number in nums, return this repeated number.
+You must solve the problem without modifying the array nums and uses only constant extra space.
+
+class Solution {
+    public int findDuplicate(int[] nums) {
+        // Initialize the slow and fast pointers
+        int slow = nums[0];
+        int fast = nums[0];
+
+        // First phase: Find the intersection point in the cycle
+        do {
+            slow = nums[slow];           // Move slow pointer one step
+            fast = nums[nums[fast]];     // Move fast pointer two steps
+        } while (slow != fast);           // Continue until they meet
+
+        // Second phase: Find the entrance to the cycle (duplicate number)
+        fast = nums[0];                   // Reset fast pointer to the start of the array
+
+        while (slow != fast) {            // Move both pointers one step until they meet
+            fast = nums[fast];            // Move fast pointer one step
+            slow = nums[slow];            // Move slow pointer one step
+        }
+
+        return slow;                      // The point where they meet is the duplicate number
+    }
+}
+
+//if any number is double 
+
+class Solution {
+    public int findDuplicate(int[] nums) {
+        int size = nums.length;
+
+        int sum1 = 0;
+        int sum2 = 0;
+        for(int i = 0; i < size; i++){
+            sum1 += nums[i];
+            sum2 += i;
+        }
+
+        return sum1 - sum2;
+    }
+}
+ 
