@@ -1,0 +1,17 @@
+Given an array arr[] of size n and an integer x, return 1 if there exists a pair of elements in the array whose absolute difference is x, 
+otherwise, return -1.
+
+class Solution {
+    public int findPair(int n, int x, int[] arr) {
+        HashSet<Integer> set = new HashSet<>();
+        for(int i = 0; i < n; i++){
+            int pair1 = arr[i] + x;
+            int pair2 = arr[i] - x;
+            if(set.contains(pair1) || set.contains(pair2)){
+                return 1;
+            }
+            set.add(arr[i]);
+        }
+        return -1;
+    }
+}
