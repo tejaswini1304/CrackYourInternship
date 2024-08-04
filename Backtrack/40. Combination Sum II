@@ -1,0 +1,30 @@
+
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> ans = new ArrayList<>();
+        Arrays.sort(candidates);  // Sort the candidates to handle duplicates
+        helper(ans, new ArrayList<>(), candidates, target, 0);
+        return ans;
+    }
+
+    public void helper(List<List<Integer>> ans, List<Integer> curr, int[] arr, int target, int idx){
+        if (target == 0) {
+            ans.add(new ArrayList<>(curr));
+            return;
+        }
+
+        for (int i = idx; i < arr.length; i++) {
+            // Skip duplicates
+            if (i > idx && arr[i] == arr[i - 1]) {
+                continue;
+            }
+            // Break the loop if the current value exceeds the target
+            if (arr[i] > target) {
+                break;
+            }
+            curr.add(arr[i]);
+            helper(ans, curr, arr, target - arr[i], i + 1);
+            curr.remove(curr.size() - 1);  // Backtrack
+        }
+    }
+}
