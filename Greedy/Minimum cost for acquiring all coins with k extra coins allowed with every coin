@@ -1,0 +1,25 @@
+public static int minCostToAcquireCoins(int[] coins, int k) {
+        // Step 1: Sort the array
+        Arrays.sort(coins);
+        
+        // Step 2: Initialize the total cost
+        int totalCost = 0;
+        
+        // Step 3: Use a pointer to track the coins we pay for
+        int i = 0;
+        int n = coins.length;
+        
+        // Step 4: Use another pointer to track the free coins from the end
+        int end = n - 1;
+        
+        while (i <= end) {
+            // Pay for the current smallest coin
+            totalCost += coins[i];
+            // Move to the next smallest coin
+            i++;
+            // Skip the next k coins from the end
+            end -= k;
+        }
+        
+        return totalCost;
+    }
